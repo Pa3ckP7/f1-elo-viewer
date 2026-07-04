@@ -212,14 +212,16 @@ def grid_vs_finish_deltas(entries: list[RaceEntry], elo_before: dict[int, float]
     return deltas
 
 
+SPRINT_WEIGHT = 1 / 3
+
+
 def sprint_weight(sprint_entries: list[RaceEntry], race_entries: list[RaceEntry]) -> float:
-    """Empirically ~0.32-0.34 across all sprint weekends in the dataset —
-    verified against the real lap counts during planning."""
-    sprint_laps = max((e.laps for e in sprint_entries if e.laps), default=None)
-    race_laps = max((e.laps for e in race_entries if e.laps), default=None)
-    if not sprint_laps or not race_laps:
-        return 0.0
-    return sprint_laps / race_laps
+    """Fixed at 1/3 rather than computed per-weekend from lap counts — the
+    real ratio clusters tightly around 0.32-0.34 across every sprint weekend
+    in the dataset (one outlier at 0.25, a red-flag-shortened case), so a
+    constant is simpler and close enough. Kept as a function (not just the
+    constant inline) in case per-weekend weighting is worth revisiting later."""
+    return SPRINT_WEIGHT
 
 
 # ---------------------------------------------------------------------------
