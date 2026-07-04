@@ -64,7 +64,7 @@ function signed(n: number): string {
         <td class="py-1.5 pr-4 text-neutral-300">{{ row.team }}</td>
         <td class="py-1.5 pr-5">
           <div class="flex items-baseline justify-end gap-2">
-            <span class="w-14 text-right font-bold tabular-nums">{{ Math.round(row.elo) }}</span>
+            <span class="w-14 text-right font-bold tabular-nums">{{ row.elo }}</span>
             <span
               class="w-12 text-left text-xs font-semibold tabular-nums"
               :class="row.eloChange > 0 ? 'text-emerald-400' : row.eloChange < 0 ? 'text-red-400' : 'text-neutral-600'"

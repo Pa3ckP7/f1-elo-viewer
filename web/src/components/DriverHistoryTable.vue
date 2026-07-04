@@ -3,6 +3,11 @@ import type { HistoryRow } from '@/types/elo'
 
 defineProps<{ rows: HistoryRow[] }>()
 
+function displayRaceName(row: HistoryRow): string {
+  const year = row.date.slice(0, 4)
+  return `${year} ${row.raceName}`
+}
+
 function signed(n: number): string {
   if (n === 0) return '0'
   return n > 0 ? `+${n}` : `${n}`
@@ -19,8 +24,7 @@ function deltaClass(n: number): string {
   <table class="w-full min-w-[700px] text-left text-sm">
     <thead>
       <tr class="border-b border-neutral-800 text-xs font-bold tracking-widest text-neutral-500 uppercase">
-        <th class="py-3 pr-4 pl-4">Date</th>
-        <th class="py-3 pr-4">Race</th>
+        <th class="py-3 pr-4 pl-4">Race</th>
         <th class="py-3 pr-4">Quali</th>
         <th class="py-3 pr-4">Finish</th>
         <th class="py-3 pr-4">Cat 1</th>
@@ -35,14 +39,13 @@ function deltaClass(n: number): string {
         :key="i"
         class="border-b border-neutral-800/60 transition-colors last:border-0 hover:bg-neutral-900"
       >
-        <td class="py-2.5 pr-4 pl-4 whitespace-nowrap text-neutral-500">{{ row.date }}</td>
-        <td class="py-2.5 pr-4 font-medium">{{ row.raceName }}</td>
+        <td class="py-2.5 pr-4 pl-4 font-medium">{{ displayRaceName(row) }}</td>
         <td class="py-2.5 pr-4 tabular-nums text-neutral-400">{{ row.qualiPos ?? '—' }}</td>
         <td class="py-2.5 pr-4 tabular-nums text-neutral-400">{{ row.finishPos ?? '—' }}</td>
         <td class="py-2.5 pr-4 tabular-nums" :class="deltaClass(row.cat1Delta)">{{ signed(row.cat1Delta) }}</td>
         <td class="py-2.5 pr-4 tabular-nums" :class="deltaClass(row.cat2Delta)">{{ signed(row.cat2Delta) }}</td>
         <td class="py-2.5 pr-4 tabular-nums" :class="deltaClass(row.cat3Delta)">{{ signed(row.cat3Delta) }}</td>
-        <td class="py-2.5 pr-4 text-base font-black tabular-nums">{{ Math.round(row.eloAfter) }}</td>
+        <td class="py-2.5 pr-4 text-base font-black tabular-nums">{{ row.eloAfter }}</td>
       </tr>
     </tbody>
   </table>

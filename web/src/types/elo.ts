@@ -42,3 +42,19 @@ export interface AsOf {
   raceName: string
   date: string
 }
+
+export interface DriverSummary {
+  driver: Driver
+  currentTeam: string
+  currentElo: number
+  peakElo: number
+  peakRaceName: string
+  peakDate: string
+  raceCount: number
+  debutDate: string
+  debutRaceName: string
+  /** Race wins -- main Grands Prix only, sprints don't count. */
+  wins: number
+  /** Podium finishes (P1-P3) -- main Grands Prix only, sprints don't count. */
+  podiums: number
+}

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { parseCsv } from '@/lib/csv'
-import type { AsOf, Driver, HistoryRow, StandingsRow } from '@/types/elo'
+import type { AsOf, Driver, DriverSummary, HistoryRow, StandingsRow } from '@/types/elo'
 
 const START_ELO = 1000
 
@@ -62,6 +62,52 @@ export const useEloStore = defineStore('elo', () => {
     return history.value.filter((h) => h.driverId === driver.driverId)
   }
 
+  function driverSummary(driverRef: string): DriverSummary | null {
+    const driver = driversByRef.value.get(driverRef)
+    const rows = historyFor(driverRef) // already chronological, oldest first
+    if (!driver || rows.length === 0) return null
+
+    const first = rows[0]!
+    const last = rows[rows.length - 1]!
+    const peak = rows.reduce((max, r) => (r.eloAfter > max.eloAfter ? r : max), rows[0]!)
+
+    // wins/podiums are main-race-only -- sprint rows are tagged " (Sprint)" in raceName
+    const raceRows = rows.filter((r) => !r.raceName.endsWith('(Sprint)'))
+    const wins = raceRows.filter((r) => r.finishPos === 1).length
+    const podiums = raceRows.filter((r) => r.finishPos !== null && r.finishPos <= 3).length
+
+    return {
+      driver,
+      currentTeam: last.team,
+      currentElo: last.eloAfter,
+      peakElo: peak.eloAfter,
+      peakRaceName: peak.raceName,
+      peakDate: peak.date,
+      raceCount: rows.length,
+      debutDate: first.date,
+      debutRaceName: first.raceName,
+      wins,
+      podiums,
+    }
+  }
+
+  function driversByRecency(): Driver[] {
+    // last row per driver = their most recent participation (history.csv is
+    // already chronological, so last occurrence wins, no re-sort needed)
+    const lastRowByDriver = new Map<number, HistoryRow>()
+    for (const row of history.value) {
+      lastRowByDriver.set(row.driverId, row)
+    }
+
+    return [...drivers.value].sort((a, b) => {
+      const rowA = lastRowByDriver.get(a.driverId)
+      const rowB = lastRowByDriver.get(b.driverId)
+      if (!rowA || !rowB) return 0
+      if (rowA.date !== rowB.date) return rowB.date.localeCompare(rowA.date) // most recent race first
+      return (rowA.finishPos ?? Infinity) - (rowB.finishPos ?? Infinity) // then position in that race
+    })
+  }
+
   function latestRace(): AsOf | null {
     if (history.value.length === 0) return null
     const last = history.value[history.value.length - 1]!
@@ -119,5 +165,17 @@ export const useEloStore = defineStore('elo', () => {
       })
   }
 
-  return { drivers, driversByRef, history, loaded, loading, load, historyFor, currentStandings, latestRace }
+  return {
+    drivers,
+    driversByRef,
+    history,
+    loaded,
+    loading,
+    load,
+    historyFor,
+    currentStandings,
+    latestRace,
+    driverSummary,
+    driversByRecency,
+  }
 })
