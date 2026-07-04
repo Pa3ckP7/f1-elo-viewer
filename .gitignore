@@ -1,0 +1,7 @@
+.conda/
+web/node_modules/
+web/dist/
+web/public/data/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
