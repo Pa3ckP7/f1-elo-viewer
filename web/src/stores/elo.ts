@@ -17,9 +17,11 @@ export const useEloStore = defineStore('elo', () => {
     if (loaded.value || loading.value) return
     loading.value = true
 
+    // Absolute "/data/..." would resolve from the domain root, not the app's
+    // base path -- breaks once deployed under /f1-elo-viewer/ (see vite.config.ts).
     const [driversText, historyText] = await Promise.all([
-      fetch('/data/drivers.csv').then((r) => r.text()),
-      fetch('/data/elo_history.csv').then((r) => r.text()),
+      fetch(`${import.meta.env.BASE_URL}data/drivers.csv`).then((r) => r.text()),
+      fetch(`${import.meta.env.BASE_URL}data/elo_history.csv`).then((r) => r.text()),
     ])
 
     const [, ...driverBody] = parseCsv(driversText)
