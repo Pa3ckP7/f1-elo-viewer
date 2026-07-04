@@ -30,7 +30,7 @@ const asOf = computed(() => {
     </p>
 
     <p v-if="store.loading" class="animate-pulse text-sm text-neutral-500">Loading standings…</p>
-    <div v-else class="overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900">
+    <div v-else class="overflow-x-auto rounded-lg border border-neutral-800 bg-neutral-900">
       <CurrentStandingsTable />
     </div>
   </section>

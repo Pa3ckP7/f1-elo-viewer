@@ -23,10 +23,13 @@ export const useEloStore = defineStore('elo', () => {
     ])
 
     const [, ...driverBody] = parseCsv(driversText)
-    drivers.value = driverBody.map(([driverId, name, driverRef]) => ({
+    drivers.value = driverBody.map(([driverId, name, driverRef, code, number, nationality]) => ({
       driverId: Number(driverId),
       name: name!,
       driverRef: driverRef!,
+      code: code!,
+      number: number === '' ? null : Number(number),
+      nationality: nationality!,
     }))
     for (const d of drivers.value) {
       driversByRef.value.set(d.driverRef, d)
@@ -35,10 +38,11 @@ export const useEloStore = defineStore('elo', () => {
 
     const [, ...historyBody] = parseCsv(historyText)
     history.value = historyBody.map(
-      ([driverId, date, raceName, qualiPos, finishPos, cat1, cat2, cat3, eloAfter]) => ({
+      ([driverId, date, raceName, team, qualiPos, finishPos, cat1, cat2, cat3, eloAfter]) => ({
         driverId: Number(driverId),
         date: date!,
         raceName: raceName!,
+        team: team!,
         qualiPos: qualiPos === '' ? null : Number(qualiPos),
         finishPos: finishPos === '' ? null : Number(finishPos),
         cat1Delta: Number(cat1),
@@ -104,6 +108,10 @@ export const useEloStore = defineStore('elo', () => {
           driverId: row.driverId,
           name: driver.name,
           driverRef: driver.driverRef,
+          code: driver.code,
+          number: driver.number,
+          nationality: driver.nationality,
+          team: row.team,
           elo: row.eloAfter,
           eloChange: row.cat1Delta + row.cat2Delta + row.cat3Delta,
           rankChange: previousRankByDriver.get(row.driverId)! - rank,

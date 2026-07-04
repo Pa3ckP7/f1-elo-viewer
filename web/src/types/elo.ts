@@ -2,12 +2,16 @@ export interface Driver {
   driverId: number
   name: string
   driverRef: string
+  code: string
+  number: number | null
+  nationality: string
 }
 
 export interface HistoryRow {
   driverId: number
   date: string
   raceName: string
+  team: string
   qualiPos: number | null
   finishPos: number | null
   cat1Delta: number
@@ -21,6 +25,10 @@ export interface StandingsRow {
   driverId: number
   name: string
   driverRef: string
+  code: string
+  number: number | null
+  nationality: string
+  team: string
   elo: number
   /** Elo gained/lost in the driver's most recent race (their last row's own deltas). */
   eloChange: number
