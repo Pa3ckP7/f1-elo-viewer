@@ -23839,3 +23839,47 @@ driver_id,date,race_name,team,quali_pos,finish_pos,cat1_delta,cat2_delta,cat3_de
 832,2026-06-28,Austrian Grand Prix,Williams,17.0,,-1,0,0,1900
 815,2026-06-28,Austrian Grand Prix,Cadillac,19.0,,-3,0,0,1890
 822,2026-06-28,Austrian Grand Prix,Cadillac,20.0,,4,0,0,1838
+863,2026-07-05,British Grand Prix (Sprint),Mercedes,,1.0,0,1,5,1944
+1,2026-07-05,British Grand Prix (Sprint),Ferrari,,2.0,0,-1,0,1940
+846,2026-07-05,British Grand Prix (Sprint),McLaren,,3.0,0,4,1,1930
+847,2026-07-05,British Grand Prix (Sprint),Mercedes,,4.0,0,1,-2,1954
+844,2026-07-05,British Grand Prix (Sprint),Ferrari,,5.0,0,-1,3,1873
+830,2026-07-05,British Grand Prix (Sprint),Red Bull,,6.0,0,-4,-2,1951
+857,2026-07-05,British Grand Prix (Sprint),McLaren,,7.0,0,0,0,1920
+859,2026-07-05,British Grand Prix (Sprint),RB F1 Team,,8.0,0,1,1,1881
+865,2026-07-05,British Grand Prix (Sprint),Red Bull,,9.0,0,-1,-1,1879
+866,2026-07-05,British Grand Prix (Sprint),RB F1 Team,,10.0,0,0,2,1830
+842,2026-07-05,British Grand Prix (Sprint),Alpine F1 Team,,11.0,0,0,-1,1907
+861,2026-07-05,British Grand Prix (Sprint),Alpine F1 Team,,12.0,0,3,0,1897
+864,2026-07-05,British Grand Prix (Sprint),Audi,,13.0,0,-1,1,1860
+860,2026-07-05,British Grand Prix (Sprint),Haas F1 Team,,14.0,0,3,-1,1893
+807,2026-07-05,British Grand Prix (Sprint),Audi,,15.0,0,-3,0,1886
+839,2026-07-05,British Grand Prix (Sprint),Haas F1 Team,,16.0,0,1,-1,1913
+832,2026-07-05,British Grand Prix (Sprint),Williams,,17.0,0,-3,0,1897
+848,2026-07-05,British Grand Prix (Sprint),Williams,,18.0,0,5,-1,1900
+822,2026-07-05,British Grand Prix (Sprint),Cadillac,,19.0,0,0,1,1839
+4,2026-07-05,British Grand Prix (Sprint),Aston Martin,,20.0,0,0,0,1854
+840,2026-07-05,British Grand Prix (Sprint),Aston Martin,,21.0,0,0,1,1845
+815,2026-07-05,British Grand Prix (Sprint),Cadillac,,22.0,0,-6,-6,1878
+844,2026-07-05,British Grand Prix,Ferrari,2.0,1.0,6,5,20,1904
+847,2026-07-05,British Grand Prix,Mercedes,4.0,2.0,-4,8,-4,1954
+1,2026-07-05,British Grand Prix,Ferrari,3.0,3.0,-2,0,0,1938
+846,2026-07-05,British Grand Prix,McLaren,6.0,4.0,-1,7,-2,1934
+865,2026-07-05,British Grand Prix,Red Bull,5.0,5.0,6,0,2,1887
+859,2026-07-05,British Grand Prix,RB F1 Team,10.0,6.0,-3,16,-2,1892
+866,2026-07-05,British Grand Prix,RB F1 Team,9.0,7.0,6,9,4,1849
+864,2026-07-05,British Grand Prix,Audi,11.0,8.0,3,14,0,1877
+861,2026-07-05,British Grand Prix,Alpine F1 Team,19.0,9.0,-4,39,-1,1931
+842,2026-07-05,British Grand Prix,Alpine F1 Team,12.0,10.0,-3,20,0,1924
+857,2026-07-05,British Grand Prix,McLaren,8.0,11.0,-3,-13,-2,1902
+860,2026-07-05,British Grand Prix,Haas F1 Team,14.0,12.0,0,4,2,1899
+839,2026-07-05,British Grand Prix,Haas F1 Team,17.0,13.0,-4,15,-3,1921
+815,2026-07-05,British Grand Prix,Cadillac,20.0,14.0,-1,25,5,1907
+863,2026-07-05,British Grand Prix,Mercedes,1.0,15.0,13,-63,-8,1886
+822,2026-07-05,British Grand Prix,Cadillac,18.0,16.0,6,9,7,1861
+832,2026-07-05,British Grand Prix,Williams,15.0,17.0,0,-12,-5,1880
+4,2026-07-05,British Grand Prix,Aston Martin,22.0,18.0,-16,9,2,1849
+840,2026-07-05,British Grand Prix,Aston Martin,21.0,19.0,2,5,5,1857
+830,2026-07-05,British Grand Prix,Red Bull,7.0,20.0,-2,-62,-21,1866
+848,2026-07-05,British Grand Prix,Williams,16.0,,0,0,0,1900
+807,2026-07-05,British Grand Prix,Audi,13.0,,1,0,0,1887
