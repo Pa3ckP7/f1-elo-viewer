@@ -34,7 +34,7 @@ export interface StandingsRow {
   eloChange: number
   /** Position change vs. the standings as they stood before the most recent race,
    * ranked among the same current-grid drivers (positive = moved up). A driver's
-   * debut race compares against the 1000 starting baseline. */
+   * debut race compares against the 1500 starting baseline. */
   rankChange: number
 }
 

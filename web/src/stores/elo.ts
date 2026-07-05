@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { parseCsv } from '@/lib/csv'
 import type { AsOf, Driver, DriverListRow, DriverSummary, HistoryRow, StandingsRow } from '@/types/elo'
 
-const START_ELO = 1000
+const START_ELO = 1500
 
 export const useEloStore = defineStore('elo', () => {
   const drivers = ref<Driver[]>([])

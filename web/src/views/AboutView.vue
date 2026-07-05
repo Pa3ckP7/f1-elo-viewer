@@ -57,7 +57,7 @@ import Katex from '@/components/Katex.vue'
         <h2 class="text-lg font-bold">How an Elo rating works</h2>
         <p class="mt-3 max-w-3xl text-sm leading-relaxed text-neutral-300">
           Elo is borrowed from competitive chess. Every driver starts at
-          <span class="font-semibold text-neutral-100">1000</span>. Before any result is known, the gap
+          <span class="font-semibold text-neutral-100">1500</span>. Before any result is known, the gap
           between two drivers' ratings converts into an "expected score" — roughly, the probability the
           higher-rated driver comes out ahead:
         </p>
@@ -81,14 +81,14 @@ import Katex from '@/components/Katex.vue'
         </p>
         <div class="mt-4 grid gap-4 sm:grid-cols-2">
           <div class="rounded-md border border-neutral-800 bg-neutral-950 p-4 text-sm">
-            <p class="font-semibold text-neutral-100">Evenly matched (1000 vs 1000)</p>
+            <p class="font-semibold text-neutral-100">Evenly matched (1500 vs 1500)</p>
             <p class="mt-2 text-neutral-300"><Katex expr="E_{AB} = 0.5" /></p>
             <p class="mt-2 text-neutral-300">
               Winner gains <Katex expr="\Delta = K(1 - 0.5) = \dfrac{K}{2}" />
             </p>
           </div>
           <div class="rounded-md border border-neutral-800 bg-neutral-950 p-4 text-sm">
-            <p class="font-semibold text-neutral-100">Favourite (1200) vs underdog (1000)</p>
+            <p class="font-semibold text-neutral-100">Favourite (1700) vs underdog (1500)</p>
             <p class="mt-2 text-neutral-300"><Katex expr="E_{\text{fav}} \approx 0.76" /></p>
             <p class="mt-2 text-neutral-300">
               Favourite wins → <Katex expr="\Delta = 32(1 - 0.76) \approx" />
@@ -132,8 +132,8 @@ import Katex from '@/components/Katex.vue'
             <div class="mt-3 rounded-md border border-neutral-800 bg-neutral-950 p-4 text-sm text-neutral-400">
               <p class="font-semibold text-neutral-100">Example</p>
               <p class="mt-1">
-                P3 (rated 980) out-qualified P4 (rated 1100, a big upset) but was out-qualified by P2 (rated
-                1000, a close call):
+                P3 (rated 1480) out-qualified P4 (rated 1600, a big upset) but was out-qualified by P2 (rated
+                1500, a close call):
               </p>
               <p class="mt-2 text-neutral-300">
                 beats P4: <Katex expr="\Delta = 32(1 - 0.334) \approx" />
@@ -153,7 +153,7 @@ import Katex from '@/components/Katex.vue'
           <div class="border-t border-neutral-800 pt-6">
             <div class="flex flex-wrap items-baseline justify-between gap-2">
               <h3 class="font-semibold text-neutral-100">2 · Grid vs. race result</h3>
-              <span class="text-xs font-semibold tracking-widest text-neutral-500 uppercase">K = 16 (half weight)</span>
+              <span class="text-xs font-semibold tracking-widest text-neutral-500 uppercase">K = 8</span>
             </div>
             <p class="mt-2 max-w-3xl text-sm leading-relaxed text-neutral-300">
               Compares where a driver started to where they finished. A driver who gained places wins against
@@ -161,39 +161,44 @@ import Katex from '@/components/Katex.vue'
               finisher who passed them. A pit-lane start (grid = 0) is treated as starting behind the whole
               field, so it can only ever be a gain. Because one race can involve several opponents at once
               (unlike categories 1 and 3, which are always exactly one win plus one loss), this category runs
-              at half weight so a single chaotic race can't swing a rating as much as qualifying or the finish
+              at a lower K so a single chaotic race can't swing a rating as much as qualifying or the finish
               order can.
             </p>
             <p class="mt-2 max-w-3xl text-sm leading-relaxed text-neutral-300">
-              <strong class="text-neutral-100">On the K value:</strong> compared against categories 1 or 3
-              individually, this category's typical per-race swing looked roughly double theirs — an early
-              signal it might be overweighted. But categories 1 and 3 both measure the same thing (placement),
-              while this one measures something different (race-craft: overtakes actually completed) — the
-              fairer comparison is against categories 1 and 3 <em>combined</em>. Measured that way, this
-              category's average magnitude over the last 10 seasons is only about 14% higher than theirs
-              combined — close to balanced. Halving K further undershoots that balance instead, making
-              race-craft count for less than placement as a whole rather than roughly the same.
+              <strong class="text-neutral-100">On the K value:</strong> categories 1 and 3 are capped
+              structurally at exactly one win plus one loss per race, but this category sums a separate
+              win/loss term for every driver passed or passed by — a big pile-up or grid-penalty recovery
+              drive can rack up a dozen-plus of those terms in one race, so comparing raw K values doesn't say
+              much about how hard a category actually swings ratings. Measured directly instead: at the old
+              K = 16, this category's average movement per driver-race was about 13.6 points, versus roughly
+              3.9 for qualifying and 6.2 for the race finish — 2–3.5x the other two, not the roughly equal
+              weight the three categories were meant to carry. K = 8 was chosen as the nearest power of two to
+              the point where this category's average swing (about 6.8) lines up with the race-finish category
+              instead of dwarfing it. This is a deliberate statistical balancing choice — equal average weight
+              across the three categories — not a claim that race-craft matters exactly as much as qualifying
+              or finishing position for driving skill; car and strategy noise is still baked into this category
+              either way.
             </p>
             <div class="mt-3 rounded-md border border-neutral-800 bg-neutral-950 p-4 text-sm text-neutral-400">
               <p class="font-semibold text-neutral-100">Example</p>
               <p class="mt-1">
-                Started P8, finished P5 (rated 1000): passed the drivers who finished P6, P7 and P8 (rated
-                1050, 950 and 1000).
+                Started P8, finished P5 (rated 1500): passed the drivers who finished P6, P7 and P8 (rated
+                1550, 1450 and 1500).
               </p>
               <p class="mt-2 text-neutral-300">
-                vs P6: <Katex expr="\Delta = 16(1 - 0.429) \approx" />
-                <span class="text-emerald-400"><Katex expr="+9" /></span>
+                vs P6: <Katex expr="\Delta = 8(1 - 0.429) \approx" />
+                <span class="text-emerald-400"><Katex expr="+5" /></span>
               </p>
               <p class="mt-2 text-neutral-300">
-                vs P7: <Katex expr="\Delta = 16(1 - 0.571) \approx" />
-                <span class="text-emerald-400"><Katex expr="+7" /></span>
+                vs P7: <Katex expr="\Delta = 8(1 - 0.571) \approx" />
+                <span class="text-emerald-400"><Katex expr="+3" /></span>
               </p>
               <p class="mt-2 text-neutral-300">
-                vs P8: <Katex expr="\Delta = 16(1 - 0.5) =" />
-                <span class="text-emerald-400"><Katex expr="+8" /></span>
+                vs P8: <Katex expr="\Delta = 8(1 - 0.5) =" />
+                <span class="text-emerald-400"><Katex expr="+4" /></span>
               </p>
               <p class="mt-2">
-                net <span class="text-emerald-400">+24</span> for the recovery drive.
+                net <span class="text-emerald-400">+12</span> for the recovery drive.
               </p>
             </div>
           </div>
@@ -211,7 +216,7 @@ import Katex from '@/components/Katex.vue'
             <div class="mt-3 rounded-md border border-neutral-800 bg-neutral-950 p-4 text-sm text-neutral-400">
               <p class="font-semibold text-neutral-100">Example</p>
               <p class="mt-1">
-                Finished P4 (rated 1000), beating P5 (rated 900) but losing out to P3 (rated 1150):
+                Finished P4 (rated 1500), beating P5 (rated 1400) but losing out to P3 (rated 1650):
               </p>
               <p class="mt-2 text-neutral-300">
                 beats P5: <Katex expr="\Delta = 32(1 - 0.640) \approx" />
