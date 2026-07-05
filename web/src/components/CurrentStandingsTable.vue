@@ -40,18 +40,18 @@ function signed(n: number): string {
             <span
               v-if="row.rankChange > 0"
               class="flex items-center text-xs font-semibold tabular-nums text-emerald-400"
-              :title="`Up ${row.rankChange} since last race`"
+              :title="`Up ${row.rankChange} since last weekend's rolling average`"
             >
               ▲{{ row.rankChange }}
             </span>
             <span
               v-else-if="row.rankChange < 0"
               class="flex items-center text-xs font-semibold tabular-nums text-red-400"
-              :title="`Down ${-row.rankChange} since last race`"
+              :title="`Down ${-row.rankChange} since last weekend's rolling average`"
             >
               ▼{{ -row.rankChange }}
             </span>
-            <span v-else class="text-xs text-neutral-600" title="No change since last race">—</span>
+            <span v-else class="text-xs text-neutral-600" title="No change since last weekend's rolling average">—</span>
           </div>
         </td>
         <td class="py-1.5 pr-4 font-bold tabular-nums text-neutral-400">{{ row.number ?? '—' }}</td>

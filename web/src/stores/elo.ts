@@ -138,38 +138,60 @@ export const useEloStore = defineStore('elo', () => {
     return { raceName: last.raceName, date: last.date }
   }
 
+  const ROLLING_WINDOW = 5
+
   function currentStandings(): StandingsRow[] {
     if (history.value.length === 0) return []
 
-    // history.csv is already in chronological event order (how the notebook
-    // builds and appends it) -- last occurrence per driver wins, no re-sort needed.
-    // Track each driver's previous row too, to measure movement since their last race.
-    const latestByDriver = new Map<number, HistoryRow>()
-    const previousByDriver = new Map<number, HistoryRow>()
+    // One row per driver per calendar weekend -- a sprint and its race share
+    // the same date, and the race's row (appended after the sprint's in the
+    // source data, so it's the later Map#set for that date) is what
+    // represents the weekend. Map insertion order is chronological since
+    // history.csv already is, so values() below stays in race order.
+    const weekendsByDriver = new Map<number, Map<string, HistoryRow>>()
     for (const row of history.value) {
-      const prior = latestByDriver.get(row.driverId)
-      if (prior) previousByDriver.set(row.driverId, prior)
-      latestByDriver.set(row.driverId, row)
+      let byDate = weekendsByDriver.get(row.driverId)
+      if (!byDate) {
+        byDate = new Map()
+        weekendsByDriver.set(row.driverId, byDate)
+      }
+      byDate.set(row.date, row)
     }
 
     const latestYear = Math.max(...history.value.map((h) => Number(h.date.slice(0, 4))))
-    const current = [...latestByDriver.values()].filter(
-      (row) => Number(row.date.slice(0, 4)) === latestYear,
-    )
 
-    // Rank the same set of drivers by their PREVIOUS Elo (debut drivers fall back
-    // to the 1000 starting baseline) to get a "before this race" ordering to compare against.
-    const previousEloByDriver = new Map<number, number>()
-    for (const row of current) {
-      previousEloByDriver.set(row.driverId, previousByDriver.get(row.driverId)?.eloAfter ?? START_ELO)
+    // Rolling average of the trailing ROLLING_WINDOW weekends, as of "endExclusive"
+    // weekends in -- smooths out a single wild (or buggy) race rather than
+    // showing it as the driver's rating outright. Debut drivers with no
+    // weekends yet in the window fall back to the 1000 starting baseline.
+    const rollingElo = (weekends: HistoryRow[], endExclusive: number): number => {
+      const slice = weekends.slice(Math.max(0, endExclusive - ROLLING_WINDOW), endExclusive)
+      if (slice.length === 0) return START_ELO
+      return slice.reduce((sum, r) => sum + r.eloAfter, 0) / slice.length
     }
+
+    const current: { driverId: number; team: string; elo: number; previousElo: number }[] = []
+    for (const [driverId, byDate] of weekendsByDriver) {
+      const weekends = [...byDate.values()]
+      const last = weekends[weekends.length - 1]!
+      if (Number(last.date.slice(0, 4)) !== latestYear) continue
+      current.push({
+        driverId,
+        team: last.team,
+        elo: rollingElo(weekends, weekends.length),
+        // the same window as of one weekend earlier -- gives a "before this
+        // weekend" baseline to measure movement and rank change against.
+        previousElo: rollingElo(weekends, weekends.length - 1),
+      })
+    }
+
     const previousRankByDriver = new Map<number, number>()
     ;[...current]
-      .sort((a, b) => previousEloByDriver.get(b.driverId)! - previousEloByDriver.get(a.driverId)!)
+      .sort((a, b) => b.previousElo - a.previousElo)
       .forEach((row, i) => previousRankByDriver.set(row.driverId, i + 1))
 
     return [...current]
-      .sort((a, b) => b.eloAfter - a.eloAfter)
+      .sort((a, b) => b.elo - a.elo)
       .map((row, i) => {
         const driver = driversById.value.get(row.driverId)!
         const rank = i + 1
@@ -182,8 +204,8 @@ export const useEloStore = defineStore('elo', () => {
           number: driver.number,
           nationality: driver.nationality,
           team: row.team,
-          elo: row.eloAfter,
-          eloChange: row.cat1Delta + row.cat2Delta + row.cat3Delta,
+          elo: Math.round(row.elo),
+          eloChange: Math.round(row.elo - row.previousElo),
           rankChange: previousRankByDriver.get(row.driverId)! - rank,
         }
       })

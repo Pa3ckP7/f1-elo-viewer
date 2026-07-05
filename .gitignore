@@ -5,3 +5,5 @@ web/public/data/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+/notebook/*

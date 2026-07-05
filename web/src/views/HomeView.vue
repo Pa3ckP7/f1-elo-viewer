@@ -22,11 +22,11 @@ const asOf = computed(() => {
   <section>
     <h1 class="text-3xl font-extrabold tracking-tight uppercase">Current Standings</h1>
     <p class="mt-2 text-sm text-neutral-400">
-      Every driver on the current grid, ranked by their latest Elo rating.
+      Every driver on the current grid, ranked by a rolling average of their last 5 race weekends.
     </p>
     <p v-if="asOf" class="mt-1 mb-8 text-xs text-neutral-500">
-      Valid as of <span class="font-medium text-neutral-400">{{ asOf }}</span> — position and Elo movement
-      shown vs. before that race.
+      Valid as of <span class="font-medium text-neutral-400">{{ asOf }}</span> — position and rating
+      movement shown vs. that same rolling average one weekend earlier.
     </p>
 
     <p v-if="store.loading" class="animate-pulse text-sm text-neutral-500">Loading standings…</p>
