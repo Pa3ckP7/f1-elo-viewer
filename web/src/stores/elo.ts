@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { parseCsv } from '@/lib/csv'
-import type { AsOf, Driver, DriverSummary, HistoryRow, StandingsRow } from '@/types/elo'
+import type { AsOf, Driver, DriverListRow, DriverSummary, HistoryRow, StandingsRow } from '@/types/elo'
 
 const START_ELO = 1000
 
@@ -93,21 +93,43 @@ export const useEloStore = defineStore('elo', () => {
     }
   }
 
-  function driversByRecency(): Driver[] {
+  function driverListRows(): DriverListRow[] {
     // last row per driver = their most recent participation (history.csv is
     // already chronological, so last occurrence wins, no re-sort needed)
     const lastRowByDriver = new Map<number, HistoryRow>()
+    const raceCountByDriver = new Map<number, number>()
     for (const row of history.value) {
       lastRowByDriver.set(row.driverId, row)
+      raceCountByDriver.set(row.driverId, (raceCountByDriver.get(row.driverId) ?? 0) + 1)
     }
 
-    return [...drivers.value].sort((a, b) => {
-      const rowA = lastRowByDriver.get(a.driverId)
-      const rowB = lastRowByDriver.get(b.driverId)
-      if (!rowA || !rowB) return 0
-      if (rowA.date !== rowB.date) return rowB.date.localeCompare(rowA.date) // most recent race first
-      return (rowA.finishPos ?? Infinity) - (rowB.finishPos ?? Infinity) // then position in that race
-    })
+    return drivers.value
+      .map((driver) => {
+        const last = lastRowByDriver.get(driver.driverId)
+        return {
+          driver,
+          team: last?.team ?? '—',
+          elo: last?.eloAfter ?? START_ELO,
+          raceCount: raceCountByDriver.get(driver.driverId) ?? 0,
+          // sprint rows are tagged " (Sprint)" in raceName -- strip it, the GP itself is what matters here
+          lastRaceName: last?.raceName.replace(/ \(Sprint\)$/, '') ?? '—',
+          lastRaceYear: last?.date.slice(0, 4) ?? '',
+          lastRow: last,
+        }
+      })
+      .sort((a, b) => {
+        if (!a.lastRow || !b.lastRow) return 0
+        if (a.lastRow.date !== b.lastRow.date) return b.lastRow.date.localeCompare(a.lastRow.date) // most recent race first
+        return (a.lastRow.finishPos ?? Infinity) - (b.lastRow.finishPos ?? Infinity) // then position in that race
+      })
+      .map(({ driver, team, elo, raceCount, lastRaceName, lastRaceYear }) => ({
+        driver,
+        team,
+        elo,
+        raceCount,
+        lastRaceName,
+        lastRaceYear,
+      }))
   }
 
   function latestRace(): AsOf | null {
@@ -178,6 +200,6 @@ export const useEloStore = defineStore('elo', () => {
     currentStandings,
     latestRace,
     driverSummary,
-    driversByRecency,
+    driverListRows,
   }
 })

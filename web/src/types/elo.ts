@@ -38,6 +38,15 @@ export interface StandingsRow {
   rankChange: number
 }
 
+export interface DriverListRow {
+  driver: Driver
+  team: string
+  elo: number
+  raceCount: number
+  lastRaceName: string
+  lastRaceYear: string
+}
+
 export interface AsOf {
   raceName: string
   date: string
