@@ -23971,3 +23971,25 @@ driver_id,date,race_name,team,quali_pos,finish_pos,cat1_delta,cat2_delta,cat3_de
 840,2026-08-23,Dutch Grand Prix,Aston Martin,19.0,,-1,0,0,1876
 860,2026-08-23,Dutch Grand Prix,Haas F1 Team,20.0,,0,0,0,1874
 830,2026-08-23,Dutch Grand Prix,Red Bull,7.0,,1,0,0,1893
+863,2026-09-06,Italian Grand Prix,Mercedes,7.0,1.0,-3,23,16,1974
+847,2026-09-06,Italian Grand Prix,Mercedes,2.0,2.0,-3,0,-2,1935
+830,2026-09-06,Italian Grand Prix,Red Bull,6.0,3.0,4,14,7,1918
+846,2026-09-06,Italian Grand Prix,McLaren,9.0,4.0,-11,14,-9,1995
+857,2026-09-06,Italian Grand Prix,McLaren,3.0,5.0,3,-7,6,1901
+1,2026-09-06,Italian Grand Prix,Ferrari,5.0,6.0,-3,-4,-3,1924
+842,2026-09-06,Italian Grand Prix,Alpine F1 Team,1.0,7.0,18,-22,-1,1901
+866,2026-09-06,Italian Grand Prix,RB F1 Team,10.0,8.0,7,9,5,1877
+861,2026-09-06,Italian Grand Prix,Alpine F1 Team,8.0,9.0,6,-5,-4,1904
+852,2026-09-06,Italian Grand Prix,RB F1 Team,17.0,10.0,2,29,1,1907
+864,2026-09-06,Italian Grand Prix,Audi,11.0,11.0,-1,0,1,1875
+807,2026-09-06,Italian Grand Prix,Audi,13.0,12.0,-2,4,-2,1905
+832,2026-09-06,Italian Grand Prix,Williams,15.0,13.0,0,8,0,1907
+859,2026-09-06,Italian Grand Prix,Red Bull,14.0,14.0,0,0,-1,1901
+860,2026-09-06,Italian Grand Prix,Haas F1 Team,12.0,15.0,1,-11,3,1867
+839,2026-09-06,Italian Grand Prix,Haas F1 Team,16.0,16.0,-1,0,-2,1898
+848,2026-09-06,Italian Grand Prix,Williams,18.0,17.0,-1,4,0,1886
+815,2026-09-06,Italian Grand Prix,Cadillac,20.0,18.0,1,4,0,1877
+822,2026-09-06,Italian Grand Prix,Cadillac,19.0,19.0,1,0,-16,1852
+840,2026-09-06,Italian Grand Prix,Aston Martin,22.0,,-15,0,0,1861
+4,2026-09-06,Italian Grand Prix,Aston Martin,21.0,,-2,0,0,1899
+844,2026-09-06,Italian Grand Prix,Ferrari,4.0,,0,0,0,1916
