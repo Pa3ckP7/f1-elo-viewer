@@ -23993,3 +23993,25 @@ driver_id,date,race_name,team,quali_pos,finish_pos,cat1_delta,cat2_delta,cat3_de
 840,2026-09-06,Italian Grand Prix,Aston Martin,22.0,,-15,0,0,1861
 4,2026-09-06,Italian Grand Prix,Aston Martin,21.0,,-2,0,0,1899
 844,2026-09-06,Italian Grand Prix,Ferrari,4.0,,0,0,0,1916
+863,2026-09-13,Spanish Grand Prix,Mercedes,2.0,1.0,-2,3,13,1988
+830,2026-09-13,Spanish Grand Prix,Red Bull,3.0,2.0,3,5,6,1932
+846,2026-09-13,Spanish Grand Prix,McLaren,1.0,3.0,15,-9,-7,1994
+844,2026-09-13,Spanish Grand Prix,Ferrari,5.0,4.0,1,4,4,1925
+847,2026-09-13,Spanish Grand Prix,Mercedes,6.0,5.0,-2,4,-2,1935
+859,2026-09-13,Spanish Grand Prix,Red Bull,8.0,6.0,0,8,2,1911
+861,2026-09-13,Spanish Grand Prix,Alpine F1 Team,9.0,7.0,-1,8,0,1911
+857,2026-09-13,Spanish Grand Prix,McLaren,7.0,8.0,2,-4,-1,1898
+866,2026-09-13,Spanish Grand Prix,RB F1 Team,10.0,9.0,3,4,2,1886
+807,2026-09-13,Spanish Grand Prix,Audi,11.0,10.0,-3,4,-2,1904
+839,2026-09-13,Spanish Grand Prix,Haas F1 Team,13.0,11.0,-1,8,0,1905
+842,2026-09-13,Spanish Grand Prix,Alpine F1 Team,14.0,12.0,0,8,-1,1908
+864,2026-09-13,Spanish Grand Prix,Audi,12.0,13.0,2,-4,3,1876
+852,2026-09-13,Spanish Grand Prix,RB F1 Team,15.0,14.0,-1,4,-2,1908
+848,2026-09-13,Spanish Grand Prix,Williams,16.0,15.0,2,4,0,1892
+860,2026-09-13,Spanish Grand Prix,Haas F1 Team,,16.0,0,8,2,1877
+4,2026-09-13,Spanish Grand Prix,Aston Martin,18.0,17.0,-1,0,-4,1894
+822,2026-09-13,Spanish Grand Prix,Cadillac,20.0,18.0,-15,0,-14,1823
+832,2026-09-13,Spanish Grand Prix,Williams,17.0,,-1,0,0,1906
+815,2026-09-13,Spanish Grand Prix,Cadillac,19.0,,0,0,0,1877
+840,2026-09-13,Spanish Grand Prix,Aston Martin,,,0,0,0,1861
+1,2026-09-13,Spanish Grand Prix,Ferrari,4.0,,-1,0,0,1923
