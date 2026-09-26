@@ -24015,3 +24015,25 @@ driver_id,date,race_name,team,quali_pos,finish_pos,cat1_delta,cat2_delta,cat3_de
 815,2026-09-13,Spanish Grand Prix,Cadillac,19.0,,0,0,0,1877
 840,2026-09-13,Spanish Grand Prix,Aston Martin,,,0,0,0,1861
 1,2026-09-13,Spanish Grand Prix,Ferrari,4.0,,-1,0,0,1923
+847,2026-09-26,Azerbaijan Grand Prix,Mercedes,1.0,1.0,16,0,16,1967
+830,2026-09-26,Azerbaijan Grand Prix,Red Bull,8.0,2.0,-2,24,1,1955
+865,2026-09-26,Azerbaijan Grand Prix,Red Bull,4.0,3.0,0,4,-2,1948
+844,2026-09-26,Azerbaijan Grand Prix,Ferrari,2.0,4.0,-1,-8,4,1920
+863,2026-09-26,Azerbaijan Grand Prix,Mercedes,16.0,5.0,-10,32,-6,2004
+1,2026-09-26,Azerbaijan Grand Prix,Ferrari,6.0,6.0,3,0,1,1927
+866,2026-09-26,Azerbaijan Grand Prix,RB F1 Team,15.0,7.0,5,33,3,1927
+839,2026-09-26,Azerbaijan Grand Prix,Haas F1 Team,14.0,8.0,-1,23,-2,1925
+860,2026-09-26,Azerbaijan Grand Prix,Haas F1 Team,11.0,9.0,3,9,3,1892
+832,2026-09-26,Azerbaijan Grand Prix,Williams,9.0,10.0,1,-4,-1,1902
+807,2026-09-26,Azerbaijan Grand Prix,Audi,18.0,11.0,-2,18,0,1920
+859,2026-09-26,Azerbaijan Grand Prix,RB F1 Team,12.0,12.0,-2,0,-2,1907
+864,2026-09-26,Azerbaijan Grand Prix,Audi,17.0,13.0,6,12,3,1897
+857,2026-09-26,Azerbaijan Grand Prix,McLaren,3.0,14.0,3,-42,-2,1857
+815,2026-09-26,Azerbaijan Grand Prix,Cadillac,20.0,15.0,0,3,-2,1878
+822,2026-09-26,Azerbaijan Grand Prix,Cadillac,22.0,16.0,-14,0,-14,1795
+861,2026-09-26,Azerbaijan Grand Prix,Alpine F1 Team,10.0,,-2,0,0,1909
+842,2026-09-26,Azerbaijan Grand Prix,Alpine F1 Team,7.0,,2,0,0,1910
+846,2026-09-26,Azerbaijan Grand Prix,McLaren,5.0,,-5,0,0,1989
+848,2026-09-26,Azerbaijan Grand Prix,Williams,13.0,,1,0,0,1893
+4,2026-09-26,Azerbaijan Grand Prix,Aston Martin,19.0,,0,0,0,1894
+840,2026-09-26,Azerbaijan Grand Prix,Aston Martin,21.0,,-1,0,0,1860
